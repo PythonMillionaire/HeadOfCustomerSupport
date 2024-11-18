@@ -1,0 +1,70 @@
+@import "mixins-and-variables";
+
+/* Overlay styles */
+#image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(256deg 20% 8% / 76%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  @include pointer;
+}
+
+/* Enlarged image styles */
+#image-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+
+  @include zoomCursor;
+}
+
+/* Close button styles */
+#close-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: hsl(256 73% 92% / 1);
+  background: hsl(256 20% 20% / 1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border: 2px solid hsl(256 20% 80% / 1);
+}
+
+/* Navigation button styles */
+.image-navigation-button {
+  position: absolute;
+  top: 50%;
+  font-size: 60px;
+  color: hsl(256 73% 92% / 1);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  @include pointer;
+}
+
+#overlay-next {
+  right: -10px;
+  transform: translate(-50%, -50%);
+}
+
+#overlay-previous {
+  left: -10px;
+  transform: translate(50%, -50%);
+}

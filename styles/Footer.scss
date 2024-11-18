@@ -1,0 +1,28 @@
+@import "mixins-and-variables";
+
+footer {
+  height: 70px;
+  width: 100vw;
+
+  background-color: hsl(256deg 17.84% 18.04%);
+
+  border-top: 1px solid hsl(256, 22.37%, 26.5%);
+
+  @include flex;
+
+  font-size: 0.76em;
+
+  z-index: 1;
+}
+
+footer b {
+  margin: 0 6px;
+}
+
+
+.contact-email {
+  margin-left: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: $text-color !important;
+}

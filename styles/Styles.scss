@@ -1,0 +1,309 @@
+@import "mixins-and-variables";
+@import "background";
+@import "Navigation section";
+@import "Main section";
+@import "skills-section";
+@import "about-page";
+@import "image-overlay";
+@import "contact";
+
+
+.circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999999; /* so that it stays on top of all other elements */
+
+  //mix-blend-mode: difference;
+}
+
+.custom-cursor {
+  @include cursor;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color;
+}
+
+a, button, .button, .social-media-icon, .project-links img {
+  @include pointer;
+}
+
+.button, button {
+  user-select: none;
+}
+
+.disabled {
+  opacity: 0.5 !important;
+
+  cursor: not-allowed !important;
+}
+
+.disabled-darker {
+  opacity: 0.25 !important;
+
+  cursor: not-allowed !important;
+}
+
+#image-overlay {
+  img {
+    @include zoomCursor;
+  }
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'proxima-nova', 'Proxima Nova', Georgia, "Helvetica Neue", Helvetica, arial, sans-serif;
+  color: $text-color;
+
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  overflow-x: hidden;
+
+  background: linear-gradient(to bottom, hsl(257deg 15.08% 13%), hsl(257, 16%, 15%)) no-repeat;
+  background-size: 100% 1500%;
+}
+
+
+
+#fixed-buttons {
+  display: none;
+}
+
+$scroll-to-top-bottom: 45px;
+#scroll-to-top-button {
+  bottom: $scroll-to-top-bottom;
+
+  &:hover {
+    line-height: 0.75em;
+  }
+}
+
+#fixed-contact-button {
+  bottom: calc($scroll-to-top-bottom + var(--circle-size) + 18px);
+
+  img {
+    width: 0.65em;
+    position: relative;
+    top: 3px;
+    filter: invert(0.80) drop-shadow(0 0 3px hsl(256, 7.26%, 37.58%)) drop-shadow(0 0 8px hsl(256, 7.26%, 40%));
+  }
+}
+
+#scroll-to-top-button, #fixed-contact-button {
+  user-select: none;
+  --circle-size: 1.05em;
+  border-radius: 50%;
+  position: fixed;
+  left: calc(50% + 550px);
+  background: hsl(257.65deg 18.28% 18.24%);
+  width: var(--circle-size);
+  height: var(--circle-size);
+  z-index: 5;
+  font-size: 2.75em;
+  text-align: center;
+  line-height: calc(var(--circle-size) - 4px);
+  border: 3px solid hsl(257deg 24% 55%);
+  @include pointer;
+  transition: line-height 0.125s ease-in-out;
+
+  padding: 0.03em;
+
+  filter: drop-shadow(0 0 12px hsla(256, 20%, 60%, 0.12));
+
+  text-shadow: 0 0 2px white, 0 0 12px hsl(256deg 7.26% 37.58%);
+
+  color: $text-color-darker-one;
+
+  &:hover {
+    color: hsl(52, 75%, 60%);
+
+    .custom-tooltip {
+      user-select: none;
+      visibility: visible;
+      top: -46px;
+      font-size: 0.33em;
+      font-weight: 600;
+      text-shadow: none;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+}
+
+.outline-button {
+  background-color: transparent;
+  border: 3px solid #986eff;
+  color: $text-color;
+  font-weight: 600;
+
+}
+
+ .custom-tooltip {
+   visibility: hidden;
+   position: absolute;
+   background-color: #292432;
+   color: #fff;
+   text-align: center;
+   padding: 6px 18px;
+   border-radius: 22px;
+   z-index: 10;
+   top: -38px;
+   border: 2px solid hsl(256deg 40.5% 58.97%);
+   left: 50%;
+   text-wrap: nowrap;
+   transform: translateX(-50%);
+
+   font-weight: 300;
+   font-size: 0.95em;
+
+   @include cursor;
+
+   b {
+     font-weight: 600;
+   }
+
+   line-height: normal;
+
+   &::after {
+     content: "";
+     position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
+     border-width: 9px;
+     border-style: solid;
+   }
+
+   &.upside-down::after {
+     border-color: transparent #eae4f5 transparent;
+     border-top: none;
+     top: -10px;
+   }
+
+   &:not(.upside-down)::after {
+     border-color: #eae4f5 transparent transparent transparent;
+     border-bottom: none;
+     bottom: -10px;
+   }
+
+ }
+
+
+li::marker {
+  color: hsl(136.21deg 46.29% 43.16%);
+}
+
+footer {
+  text-align: center;
+  padding: 1em;
+
+}
+
+s
+{
+  opacity: 0.6;
+}
+
+.text {
+  position: relative;
+}
+
+.text::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  height: 3px;
+  background: linear-gradient(to left, hsla(110, 50%, 58%, 0.7) 10%, hsl(257, 71%, 68%) 50%, hsl(257, 71%, 68%) 100%);
+  width: 0;
+
+  @keyframes underline {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
+
+.underline-button:not(.disabled):hover > .text::before {
+  animation: underline 0.5s ease forwards;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive adjustments for main content width */
+@media screen and (max-width: 768px) {
+  #main h2
+  {
+    margin-bottom: 0.8rem;
+  }
+
+  header {
+    padding: 1em 2.4em;
+  }
+
+  /* Set main sections to full width */
+  #about-section,
+  #work-section,
+  #portfolio-section,
+  #contact-section {
+    width: 100%;
+    padding: 0 15px; /* Add side padding for mobile */
+    box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+  }
+
+  /* Set section contents to full width */
+  #about-section-contents,
+  #work-section-contents,
+  #portfolio-section-contents,
+  #contact-section-contents {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* Adjust padding and margins for content */
+  #about-section-contents,
+  #work-section-contents,
+  #portfolio-section-contents,
+  #contact-section-contents,
+  footer {
+    padding: 0 15px;
+  }
+
+  /* Adjust content column padding */
+  .content-column,
+  .header-column {
+    padding: 0;
+  }
+
+  /* Adjust any elements with fixed widths */
+  .section-item {
+    width: 100%;
+  }
+}

@@ -1,0 +1,254 @@
+/* END GENERAL */
+/* SKILLS */
+#skills-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  flex-wrap: nowrap;
+  margin: 120px 0 100px;
+  width: 100vw;
+  scroll-margin-top: 120px;
+  white-space: nowrap; /* Line up the icons in a row */
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+}
+
+#skills-section-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0px;
+  flex-wrap: nowrap;
+  width: 1250px;
+}
+
+#skills-section-inner {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  gap: 24px;
+  flex-wrap: nowrap;
+  width: 1130px;
+  overflow: hidden;
+  /* Apply a horizontal gradient mask */
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  /* Ensure the mask applies to the content and the background */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+#skills-section-inner.grabbing {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  animation-play-state: paused;
+}
+#skills-section-inner > div {
+  
+}
+#skills-section-inner span {
+  position: relative;
+  top: 0px;
+  font-weight: 300;
+}
+
+.tech-icon {
+  width: auto;
+  height: auto;
+  max-width: 20px;
+  max-height: 20px;
+  object-fit: contain;
+}
+
+#regex-icon {
+  filter: invert(0.8);
+}
+
+/*
+#skills-section-container-inner {
+  display: flex;
+  justify-content: center;
+  gap: 78px;
+  width: 100%;
+  padding: 0 110px;
+
+}
+
+.skills-section-item-border {
+  width: calc(100%);
+
+  background: linear-gradient(45deg, hsl(257deg 48% 53.52%), hsl(257, 100%, 95.3%));
+  border-radius: $border-radius;
+
+  @include flex;
+
+  padding: 15px 6px;
+
+  border: 1px solid hsl(0deg 0% 0% / 70%);
+
+  transition: background 3s linear;
+
+  animation: skills-section-item-border-reflection 3s linear infinite;
+
+  filter: drop-shadow(0px 3px 6px hsl(256 20% 10% / 0.35));
+}
+
+
+.skills-section-item {
+  $bg-opacity: 0.63;
+
+  border-radius: $border-radius - 5px;
+  background: linear-gradient(to bottom, hsl(257, 12%, 14%), hsl(257, 20.15%, 8.52%));
+  //border: 5px solid hsl(257deg 100% 92.03% / 0.92);
+  width: 100%;
+  height: 100%;
+  padding: 0 15px 16px;
+  box-shadow: 0 0 60px 0 hsla(257, 30%, 60%, 0.2), inset 0 0 30px 0 hsla(257, 50%, 70%, 0.08);
+  position: relative;
+
+  border: 1px solid hsl(257deg 50% 70% / 70%);
+
+  ul {
+    padding-inline-start: 32px;
+  }
+
+  ul li {
+    font-weight: 400;
+    color: $text-color-darker-three;
+    padding: 12px 0;
+    font-size: 1.05em;
+  }
+}
+
+.skills-section-item::before
+{
+  content: '';
+  position: absolute;
+  opacity: 0.03;
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.2);
+  background: hsl(257deg 27.47% 71.98%);
+  height: 76px;
+  border-radius: 20%;
+  $mask-gradient: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
+  -webkit-mask-image: $mask-gradient;
+  mask-image: $mask-gradient;
+  top: 9px;
+  width: 92%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.skills-section-item::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1), rgba(200, 200, 200, 0.8), rgba(150, 150, 150, 0.5), rgba(200, 200, 200, 0.55), rgba(255, 255, 255, 0.2)  );
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.skill-icon {
+  width: 20%;
+  filter: drop-shadow(0px 0 30px hsla(257, 80%, 80%, 1)) drop-shadow(0 6px 3px hsla(257, 16%, 13%, 1));
+  opacity: 0.82;
+}
+
+@keyframes fluctuate {
+  0%, 100% {
+    transform: translate(calc(-1px + var(--x-offset)), calc(-1px + var(--y-offset)));
+  }
+  50% {
+    transform: translate(calc(1px + var(--x-offset)), calc(1px + var(--y-offset)));
+  }
+}
+
+.skill-icon-container {
+  width: 100%;
+  @include flex(center, flex-start);
+
+  padding: 65px 22px 0px;
+  box-sizing: border-box;
+
+  height: 130px;
+}
+
+
+.skill-title {
+  width: 100%;
+  @include flex;
+  font-size: 1.30em;
+  color: $text-color-darker-one;
+  opacity: 0.92;
+
+  letter-spacing: 0.0175em;
+  font-weight: 600;
+
+  font-family: "Segoe UI Variable", system-ui, sans-serif;
+}
+
+.skills-divider-container {
+  @include flex;
+  width: 100%;
+}
+
+.skills-divider {
+  width: 20%;
+  height: 5px;
+  background-color: #eae2ff;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #a083ed;
+}
+
+
+
+#skill-design-icon {
+  width: calc(20% + 4px);
+
+  position: relative;
+  top: -2px;
+
+}
+
+#skill-front-end-development {
+  width: calc(100% + 140px);
+}
+
+#skill-front-end-development-icon {
+  opacity: 0.8;
+  width: 18%;
+}
+
+#skill-design-icon {
+  opacity: 0.85;
+  width: 19.5%;
+}
+
+#skill-other-icon {
+  position: relative;
+  top: 2px;
+  width: 19.5%;
+}
+
+
+
+
+#skill-front-end-development {
+  @include fadeIn(left-up, $duration: 0.9s);
+}
+
+#skill-graphic-design {
+  @include fadeIn(up, $duration: 1.1s);
+}
+
+#skill-technical {
+  @include fadeIn(right-up, $duration: 0.9s);
+}*/
+
+/*# sourceMappingURL=skills-section.css.map */

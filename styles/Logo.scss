@@ -1,0 +1,272 @@
+@use 'sass:math';
+@import "mixins-and-variables";
+
+#logo {
+  font-family: "Forte", "Lucida Bright", serif;
+  position: relative;
+  top: -2px;
+  left: -26px;
+  font-size: 1.8em;
+  margin: 0;
+  font-weight: 900;
+  filter: drop-shadow(0 0px 124px hsla(257, 27%, 47%, 1)) drop-shadow(0 1px 1px hsla(257, 16%, 15%, 0.15)) drop-shadow(0 0px 80px hsla(257, 12%, 70%, 1));
+  display: flex;
+
+  transform: scale(0.87);
+
+  @include fadeInBounce(down-left-logo, $bounce-dampener: 10, $scale: 0.87);
+
+  user-select: none;
+}
+
+#logo-text {
+  position: relative;
+  left: 25px;
+  letter-spacing: 0.038em;
+  filter: brightness(1.07);
+  font-size: 1.15em;
+  font-weight: 100;
+  display: flex;
+  transform: scaleX(1.04);
+
+}
+
+#angle-brackets-container {
+  position: relative;
+  top: 4px;
+
+  letter-spacing: -0.0025em;
+
+  filter: saturate(1.175) drop-shadow(0px 0px 0px hsla(205, 100%, 40%, 0.35)) drop-shadow(1px 4px 6px hsl(257, 5%, 10%));
+
+}
+
+#open-angle-bracket, #close-angle-bracket {
+  font-family: "Source Code Pro", monospace;
+  filter: drop-shadow(0px 0px 1px hsl(257 50% 30% / 1));
+
+  background: linear-gradient(to top, hsl(256 80% 50% / 1), hsl(110 90% 60% / 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#close-angle-bracket {
+  position: relative;
+
+  right: -12px;
+}
+
+
+
+#letter-j, #letter-g {
+  font-family: "Lucida Bright", serif;
+  font-style: italic;
+}
+
+@mixin text-gradient($gradient)
+{
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent; /* For non-webkit browsers */
+  -webkit-text-fill-color: transparent; /* For webkit browsers */
+}
+
+.hole-cover {
+  background-color: hsl(261deg 55.31% 14.2%);
+
+  position: absolute;
+
+  filter: drop-shadow(0 0 6px hsla(261, 20%, 20%, 0.3));
+
+  border-radius: 50%;
+
+}
+
+.letter-e {
+  width: 0.107em;
+  height: 0.23em;
+
+  transform: rotate(20deg);
+  opacity: 0.83;
+
+  top: 0.6em;
+}
+
+.letter-s {
+  height: 0.15em;
+  width: 0.107em;
+
+  opacity: 0.75;
+}
+
+
+#jose-letter-s-hole-one, #guedes-letter-s-hole-one {   top: 0.6em; }
+
+#jose-letter-s-hole-two, #guedes-letter-s-hole-two {   top: 0.858em;  }
+
+#jose-letter-s-hole-one, #jose-letter-s-hole-two {
+  display: none;
+}
+
+/*#jose-letter-s-hole-one {   left: 0.78em;    }
+
+#jose-letter-s-hole-two {   left: 0.725em;   }*/
+
+
+#jose-letter-e-hole {   left: 0.76em;   }
+
+
+#guedes-letter-e-one-hole {  left: 2.955em;   }
+
+#guedes-letter-e-two-hole {   display: none; left: 5.08em;   }
+
+
+#guedes-letter-s-hole-one {   right: 0.16em; width: 0.135em;  }
+
+#guedes-letter-s-hole-two {   right: 0.192em; width: 0.135em; opacity: 0.82; }
+
+.guedes-letter-d-hole {
+  width: 0.107em;
+  height: 0.35em;
+  transform: rotate(20deg);
+  opacity: 0.83;
+  top: 0.57em;
+}
+
+#guedes-letter-d-hole-one {
+  right: 1.37em;
+}
+#guedes-letter-d-hole-two {
+  right: 0.77em;
+}
+
+  /*#guedes-letter-u-hole {
+    width: 0.107em;
+    height: 0.35em;
+    transform: rotate(20deg);
+    opacity: 0.83;
+    top: 0.525em;
+    right: 2.264em;
+  }*/
+
+
+#jose-text, #guedes-text, #letter-g, #letter-j {
+  filter: drop-shadow(0px 0px 1px hsl(257, 5%, 72%)) drop-shadow(0px 2px 6px hsl(257, 5%, 10%)) drop-shadow(0px 0px 3px hsla(257, 50%, 30%, 0.3));
+}
+
+$white-gradient: linear-gradient(to bottom, hsl(257, 18%, 96%), hsl(257, 36%, 74%));
+
+#jose {
+  @include text-gradient($white-gradient);
+  margin-right: 6px;
+  position: relative;
+
+  left: -2px;
+}
+
+#jose-text { @include text-gradient($white-gradient); }
+
+
+#guedes-text { @include text-gradient($white-gradient); }
+
+#letter-j {
+  @include text-gradient($white-gradient);
+
+  font-size: 1.05em;
+
+  filter: drop-shadow(0px 0px 1px hsl(257, 30%, 80%)) drop-shadow(1px 4px 6px hsl(257, 20%, 8%));
+
+  width: 0.56em;
+}
+
+#letter-g {
+  @include text-gradient(linear-gradient(to bottom, hsl(257deg 67.88% 68.13%), hsl(257deg 43.34% 48%)));
+
+  font-size: 1.1em;
+
+  margin-right: 2px;
+
+  width: 0.82em;
+}
+
+$rotation: 20deg;
+
+$handle-height: 300px;
+$handle-width: 40px;
+
+$cotangent: math.div(math.cos($rotation), math.sin($rotation));
+
+#paint-brush-container {
+  position: absolute;
+  top: -60px;
+  left: -6px;
+
+  transform: scale(0.09);
+
+  filter: drop-shadow(0px 0px 1px hsla(257, 80%, 80%, 0.2)) drop-shadow(0px 0px 1px hsla(110, 50%, 50%, 0.05));
+}
+
+/* BRUSH ICON */
+#paint-brush-handle {
+  position: relative;
+  /* height: 300px; */
+  width: $handle-width;
+  /* border-radius: 0 0 40% 40%; */
+  transform: rotate(20deg) scaleY(6);
+
+  z-index: 0;
+  border-right: 12px solid transparent;
+  border-left: 12px solid transparent;
+  border-top: 30px solid #7c5fca;
+  box-sizing: content-box;
+
+  border-radius: 5px;
+
+  /* turn into trapezoid */
+  &::before {
+    display: block;
+    content: '';
+    position: relative;
+    height: 30px;
+    width: $handle-width * 1.2;
+
+    border-radius: 0 0 40% 40%;
+
+    transform: translateY(math.div(-$handle-height, 20)) translateX(math.div(-$handle-width, 10));
+
+    background: linear-gradient(to bottom, #7c5ec9 30%, #70c95f);
+
+  }
+
+  /* black band top of handle */
+  &::after {
+    content: '';
+    display: block;
+    width: $handle-width * 1.4;
+    height: math.div($handle-height, 100);
+
+    background: hsl(256 30% 20% / 1);
+
+    position: absolute;
+    top: math.div($handle-height, -12);
+    left: math.div($handle-width, -5);
+  }
+}
+
+$rotation-tip: 0deg;
+
+#paint-brush-tip {
+  width: $handle-width * 1.75;
+  height: math.div($handle-height, 3);
+
+  background: linear-gradient(180deg, hsl(55, 80%, 70%), hsl(48, 90%, 42%));
+
+  transform: rotate(-$rotation-tip) translateX(-65px) translateY(90px) skew(-10deg, -10deg);
+
+  border-radius: 50% 50% 50% 0% ;
+}
+
+
+/* END BRUSH ICON */

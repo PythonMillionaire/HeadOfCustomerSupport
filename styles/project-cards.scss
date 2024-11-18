@@ -1,0 +1,291 @@
+@import "mixins-and-variables";
+
+#projects-section-main-header-container {
+  margin-bottom: 1.3em;
+}
+
+#project-list-header {
+  margin: 0 !important;
+}
+
+.project-information {
+  margin: 14px 0;
+
+  @include flex($justify-content: flex-start, $flex-direction: column);
+
+  color: $text-color-darker-one;
+}
+
+.project-image {
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid hsl(256 20% 30% / 1);
+
+  @include pointer;
+}
+
+.project-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  transition: transform 0.4s ease;
+}
+
+.project-image:hover img {
+  transform: scale(1.35);
+}
+
+.project-name {
+
+}
+
+.project-client {
+  font-style: italic;
+  font-weight: 400;
+
+  margin: 0;
+}
+
+.project-description {
+  line-height: 2.4;
+  text-align: justify;
+
+  padding: 0 8px;
+
+  font-weight: 300;
+
+  letter-spacing: 0.05em;
+
+  font-size: 1.0315em;
+
+  b {
+    letter-spacing: 0.07em;
+  }
+}
+
+.project-tags {
+  font-family: "Segoe UI Variable", system-ui, sans-serif;
+  font-size: 1.05em;
+
+  padding-bottom: 18px;
+  width: 100%;
+  font-style: italic;
+  color: hsl(257, 50.12%, 81.35%);
+  font-weight: 400;
+  text-shadow: 0 0 1px hsl(256 30% 90% / 1);
+
+  @include flex($gap: 8px);
+}
+
+.project-icons {
+  @include flex(space-between, center);
+
+  margin: 26px 0 30px;
+
+  padding: 0 10px;
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  img {
+    filter: invert(0.78) drop-shadow(0 0 3px hsl(257deg 50.12% 50%));
+  }
+}
+
+.project-links {
+  position: relative;
+
+  @include flex($gap: 8px);
+  font-size: 0.96em;
+
+  i {
+    color: $text-color-darker-three;
+    opacity: 0.8;
+  }
+
+  .project-open-details {
+    position: relative;
+    @include pointer;
+  }
+
+  > span {
+    @include flex;
+
+    position: relative;
+
+    a {
+      @include flex;
+    }
+  }
+
+  > span:hover .custom-tooltip {
+    visibility: visible;
+    top: -46px;
+  }
+}
+
+.project-github-icon {
+  width: 17px;
+}
+
+.open-details-icon {
+  width: 16px;
+
+  padding: 4px;
+
+  position: relative;
+}
+
+.folder-icon {
+  width: 22px;
+  height: 22px;
+}
+
+#projects-section-container {
+  @include flex($flex-direction: column);
+
+  width: $page-width - 200px;
+  max-width: $page-width - 200px;
+
+  margin-bottom: 120px;
+}
+
+#project-list {
+  @include flex(center, stretch, $gap: 54px);
+
+  margin-top: 40px;
+}
+
+#see-portfolio {
+  @include flex;
+
+  position: relative;
+
+  margin-top: 64px;
+
+  font-size: 1.55em;
+
+  color: $text-color-darker-two;
+
+  font-weight: 600;
+
+  $arrow-scale: 0.8;
+
+  > span.arrow {
+    color: $color-yellow;
+
+    margin-left: 10px;
+    font-size: 1.6em;
+    font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Times New Roman", serif;
+    position: relative;
+    top: -3px;
+    transform: scaleX($arrow-scale);
+
+    text-shadow: 0 0 1px hsl(52, 75.88%, 60%);
+  }
+
+  > span.text::before {
+    bottom: -3px;
+  }
+
+  &:hover > span.arrow {
+    @keyframes moveLeftAndRight {
+      0%, 30% {
+        transform: translateX(0) scaleX($arrow-scale);
+      }
+      15%, 45% {
+        transform: translateX(8px) scaleX($arrow-scale);
+      }
+      60% {
+        transform: translateX(0) scaleX($arrow-scale);
+      }
+    }
+
+    animation: moveLeftAndRight 1.5s ease infinite;
+  }
+}
+
+#projects-section-container.animate {
+  // this animation moves the element up so that it takes up its correct place. It's originally moved down
+  // so that its children's animations aren't triggered by the intersection observer on page load for 1920x1080 screens
+  // which would make them not be visible
+
+  $anim-height: -60px;
+
+  @keyframes moveUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY($anim-height);
+    }
+  }
+
+  transform: translateY($anim-height);
+
+  animation: moveUp 1.5s ease;
+}
+
+.project-card-border {
+  // for animation. Prevents the element appearing out of position
+  visibility: hidden;
+
+  width: 100%;
+
+  background: linear-gradient(45deg, hsl(257deg 48% 53.52%), hsl(257, 100%, 95.3%));
+  border-radius: $border-radius;
+
+  @include flex;
+
+  padding: 14px 4px;
+
+  border: 1px solid hsl(0deg 0% 0% / 70%);
+
+  transition: background 3s linear;
+
+  animation: skills-section-item-border-reflection 3s linear infinite;
+
+  filter: drop-shadow(0px 3px 6px hsl(256 20% 10% / 0.35));
+}
+
+.project-card-border.animate:nth-of-type(1) {
+  @include fadeInBounce(up-left-project-card-border);
+}
+
+.project-card-border.animate:nth-of-type(2) {
+  @include fadeInBounce(up-project-card-border, 50px);
+}
+
+.project-card-border.animate:nth-of-type(3) {
+  @include fadeInBounce(up-right-project-card-border);
+}
+
+.project-card {
+  @include flex(space-between, $flex-direction: column);
+
+  $bg-opacity: 0.63;
+
+  border-radius: $border-radius - 1px;
+  background: linear-gradient(to bottom, hsl(257, 16%, 15%), hsl(257, 19%, 11%));
+  //border: 5px solid hsl(257deg 100% 92.03% / 0.92);
+  width: 100%;
+  height: 100%;
+  padding: 0 28px 16px;
+  box-shadow: 0 0 60px 0 hsla(257, 30%, 60%, 0.06), inset 0 0 30px 0 hsla(257, 50%, 70%, 0.06);
+  position: relative;
+
+  border: 1px solid hsl(257deg 50% 70% / 70%);
+
+  ul {
+    padding-inline-start: 32px;
+  }
+
+  ul li {
+    font-weight: 400;
+    color: $text-color-darker-three;
+    padding: 12px 0;
+    font-size: 1.05em;
+  }
+}

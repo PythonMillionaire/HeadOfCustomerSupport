@@ -1,0 +1,140 @@
+@import "mixins-and-variables";
+
+
+#skewed-bars {
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 30%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 30%);
+  height: 100%;
+  opacity: 0.15;
+}
+
+$bar-width: 120px;
+
+:root {
+  --number-of-rows: 24;
+}
+
+$number-of-rows: 24;
+
+$bar-height: calc(900px / $number-of-rows);
+
+$skew-angle: 0deg;
+
+$y-offset: 0;
+
+$skew-angle-tangent: 0.57735026919;
+
+.bar {
+  position: absolute;
+  width: $bar-width;
+  height: $bar-height;
+  box-shadow: 2px 2px 4px 2px hsl(257 30% 50% / 0.05);
+  border: 1px solid hsl(257deg 8.67% 20.29%);
+}
+
+$adjusted-bar-height: $bar-height + 3;
+
+
+$x-offset: $y-offset * $skew-angle-tangent;
+
+@mixin evenOdd($side, $i, $selector, $color-left, $color-right){
+  #row-#{$i}-#{$side} span:nth-child(#{$selector}) {
+    background:  if($side == 'left', $color-left, $color-right);
+  }
+};
+
+@for $i from 1 through $number-of-rows {
+  // Define row top positions
+  .row-#{$i} {
+    top: $adjusted-bar-height * ($i - 1);
+  }
+  // Define odd row adjustments
+  .row-#{$i} span:nth-child(odd) {
+    top: $adjusted-bar-height * ($i - 1) - $y-offset;
+  }
+
+  // Apply styles to left and right bars
+  @each $side in ('left', 'right') {
+    #row-#{$i}-#{$side} {
+      top: $adjusted-bar-height * ($i - 1);
+    }
+
+    #row-#{$i}-#{$side} span:nth-child(odd) {
+      top: $adjusted-bar-height * ($i - 1) - $y-offset;
+    }
+  }
+
+  // Determine child selectors based on row number
+  $selector-odd: if($i % 2 == 0, 'even', 'odd');
+  $selector-even: if($i % 2 == 0, 'odd', 'even');
+
+  // Apply styles to left and right bars
+  @each $side in ('left', 'right') {
+    @include evenOdd($side, $i, $selector-odd, hsl(257 25% 80% / 0.05), hsl(257 0% 6% / 0.1));
+    @include evenOdd($side, $i, $selector-even, hsl(257 25% 80% / 0.1), hsl(257 0% 29% / 0.15));
+  }
+}
+
+$number-of-bars: 8; // Number of .bar elements
+
+$adjusted-bar-width: $bar-width + 4px;
+
+$row-settings: ();
+
+@for $i from 1 through $number-of-rows {
+  // these adjustments push the bars to the left more with each row to compensate for the skewness
+  $adjustment: if($i == 1, 90px,  $adjusted-bar-height * $skew-angle-tangent * ($i - 1));
+  $row-settings: map-merge($row-settings, ('row-' + $i: ($adjustment, $i)));
+}
+
+#left-bars .bar {
+  transform: skew(-$skew-angle, 0);
+}
+
+$lateral-offset: -70px;
+#right-bars .bar {
+  transform: skew($skew-angle, 0);
+}
+
+@mixin positionRows($row-number, $side, $number-of-bars, $adjustment) {
+  $row-name-full: '#row-' + $row-number;
+
+  @for $i from 1 through $number-of-bars {
+    $x-offset-to-use: if($i % 2 == 0, 0, $x-offset);
+    #{$row-name-full}-#{$side} span:nth-child(#{$i}) {
+      //
+      #{$side}: $adjusted-bar-width * ($i - 1) - $adjustment + if($row-number > 1, 35px - $bar-width, 5px) + $x-offset-to-use;
+    }
+  }
+}
+
+@mixin positionAllRows($side) {
+  @each $row, $settings in $row-settings {
+    $adjustment: nth($settings, 1);
+    $row-number: nth($settings, 2);
+
+    @include positionRows($row-number, $side, $number-of-bars, $adjustment);
+  }
+}
+
+#left-bars {
+  position: relative;
+  left: $lateral-offset;
+
+  .bar {
+    transform: skew(-$skew-angle, 0);
+  }
+
+  @include positionAllRows(left);
+}
+
+#right-bars {
+  position: relative;
+  right: $lateral-offset;
+
+  .bar {
+    transform: skew($skew-angle, 0);
+  }
+
+  @include positionAllRows(right);
+}

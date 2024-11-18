@@ -1,0 +1,17 @@
+/* END GENERAL */
+/* SKILLS */
+form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+form input {
+  border-radius: 10px;
+  border: none;
+  height: 1.6em;
+}
+
+/*# sourceMappingURL=contact.css.map */

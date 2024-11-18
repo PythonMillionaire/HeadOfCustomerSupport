@@ -1,0 +1,384 @@
+@import "mixins-and-variables";
+@import "What to expect";
+@import "Work section";
+@import "Footer";
+/* about, portfolio */
+
+
+#about-section, #work-section, #portfolio-section, #contact-section {
+    height: 100%;
+
+    @include flex(flex-start, center, column);
+
+    scroll-margin-top: 120px;
+
+    width: $page-width;
+}
+
+#about-section-contents, #work-section-contents, #portfolio-section-contents, #contact-section-contents {
+    @include flex(flex-start, center, column);
+    width: 100%;
+}
+
+#about-section-contents, #work-section-contents, #portfolio-section-contents, #contact-section-contents, footer {
+    padding: 0 30px;
+
+    box-sizing: border-box;
+
+    font-size: 1.18em;
+    font-weight: 300;
+
+    letter-spacing: 0.03em;
+
+    line-height: 2.5;
+
+    text-align: justify;
+
+    color: $text-color-darker-two;
+
+    ul li {
+        margin-bottom: 20px;
+    }
+}
+
+
+#about-section-contents {
+    position: relative;
+    top: -30px;
+
+    h4 {
+        font-weight: bold;
+    }
+}
+
+#personal-information {
+    @include flex(space-between, $wrap: wrap, $gap: 12px 0px);
+
+    margin-top: 20px;
+
+    > div > i {
+        margin-left: 12px;
+    }
+}
+
+#about-section-contents > :nth-child(4){
+    margin-bottom: 8px;
+}
+
+h4.about-section-header-row {
+    font-size: 1.125em;
+}
+
+ul.custom-bullets-x, ul.custom-bullets-checkmark {
+    list-style-type: none; /* Removes the default list-style */
+    padding-right: 20px;
+
+    padding-inline-start: 20px;
+}
+
+ul.custom-bullets-x li::before, ul.custom-bullets-checkmark li::before {
+    content: '';
+    display: inline-block;
+
+    margin-right: 10px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+ul.custom-bullets-x li::before {
+    width: 11px;
+    height: 11px;
+
+    position: relative;
+    top: -1px;
+}
+
+ul.custom-bullets-checkmark li::before {
+    width: 18px;
+    height: 18px;
+
+    position: relative;
+    top: 2px;
+}
+
+ul.custom-bullets-x li::before {
+    background-image: url('/icons/X mark.svg');
+}
+
+ul.custom-bullets-checkmark li::before {
+    background-image: url('/icons/Checkmark.svg');
+}
+
+
+.section-item {
+    @include flex(flex-start, flex-start);
+
+    margin-bottom: 18px;
+
+    width: 100%;
+}
+
+.section-item b {
+    font-weight: 700;
+}
+
+
+.header-column {
+    width: 30%;
+
+    // for animation. Prevents the element appearing out of position
+    visibility: hidden;
+
+    height: 100%;
+
+    @include flex(flex-start, flex-start, column);
+
+    h4 span {
+        color: hsl(254 50% 87% / 1);
+        position: relative;
+        top: 2px;
+    }
+
+    > span {
+        height: 100%;
+
+        @include flex;
+
+        flex-grow: 1;
+
+        img {
+            filter: drop-shadow(0 0px 6px hsl(256, 60%, 20%)) drop-shadow(0 4px 6px hsl(256, 20%, 18%));
+            position: relative;
+            top: -12px;
+        }
+    }
+
+}
+
+
+#me-professional-icon {
+    width: 32%;
+}
+
+#me-individual-icon {
+    width: 50%;
+}
+
+#work-history-icon {
+    width: 30%;
+}
+
+$base-column-content-margin: 0.765em;
+
+.content-column {
+    width: 70%;
+    padding-right: 47px;
+
+    // for animation. Prevents the element appearing out of position
+    visibility: hidden;
+
+    p:first-child {
+        margin-top: $base-column-content-margin + 0.2em;
+    }
+}
+
+@mixin section-main-header() {
+    text-align: center;
+    font-weight: 500;
+
+    padding: 0 60px;
+}
+
+.section-header {
+    @include section-main-header;
+}
+
+.section-header-container {
+    width: 100%;
+    @include flex($justify-content: space-around);
+
+    padding: 0 150px;
+    box-sizing: border-box;
+
+    opacity: 0;
+
+    // for animation. Prevents the element appearing out of position
+    visibility: hidden;
+}
+
+@mixin gradient-divider($direction) {
+    width: 50%;
+    height: 3px;
+
+    background: linear-gradient(to $direction, hsl(110 50% 58% / 0.7) 10%, hsl(257 71% 68% / 1) 50%, hsl(257 71% 68% / 1) 100%);
+
+    $mask-direction: if($direction == right, left, right);
+
+    mask-image: linear-gradient(to $mask-direction, rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 1) 100%);
+}
+
+
+.gradient-divider {
+    @include gradient-divider(left);
+}
+
+.gradient-divider-inverted {
+    @include gradient-divider(right);
+}
+
+h4 {
+    text-align: left;
+    font-family: "proxima-nova", "Proxima Nova", Georgia, "Helvetica Neue", Helvetica, arial, sans-serif;
+    font-size: 1.078em;
+    white-space: nowrap;
+    line-height: 2.325;
+    letter-spacing: 0.025em;
+    color: $text-color-darker-two;
+    font-weight: 300;
+
+    //background-color: hsl(252deg 17.54% 17.54% / 39%);
+
+    filter: drop-shadow(0 0 20px hsl(252deg 16.41% 12.3%));
+
+}
+
+.about-section-header { margin: $base-column-content-margin 0 0 2.5em; }
+
+.header-row {
+    @include flex($flex-direction: column);
+
+    width: 100%;
+}
+
+
+.header-row h4 {
+    margin: 22px 0 0 0;
+}
+
+$bounce-dampen-amount: 3;
+
+.section-header-container.animate {
+    @include fadeInBounce(down-section-header, 50px, 1.5s, $bounce-dampener: $bounce-dampen-amount);
+
+    opacity: 1;
+}
+
+#projects-section-main-header-container.animate {
+    @include fadeInBounce(up-header-container, 50px, 1.5s, $bounce-dampener: $bounce-dampen-amount);
+
+    opacity: 1;
+}
+
+$about-duration: 1.4s;
+
+.header-column.animate {
+    @include fadeInBounce(left-up-header-column, $duration: $about-duration, $bounce-dampener: $bounce-dampen-amount);
+
+}
+
+.content-column.animate {
+    @include fadeInBounce(right-up-header-column, $duration: $about-duration, $bounce-dampener: $bounce-dampen-amount);
+
+}
+
+.content-column .tech-icon {
+    opacity: 0;
+}
+
+#skills-section-about-page {
+    @include flex(flex-start, $wrap: wrap, $gap: 6px 24px);
+
+    margin-top: 21px;
+
+}
+
+.skill > span {
+    font-weight: 600;
+}
+
+
+#skills-section-about-page > div {
+    @include flex(space-between, $inline: true, $gap: 12px);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive adjustments for the About page */
+@media screen and (max-width: 768px) {
+    h4.about-section-header {
+        font-size: 1.225em;
+    }
+
+    body {
+        padding: 0 24px;
+    }
+
+    /* Make section items stack vertically */
+    .section-item {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    /* Set header and content columns to full width */
+    .header-column,
+    .content-column {
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Center the headers */
+    .header-column h4,
+    .header-row h4 {
+        text-align: center;
+    }
+
+    /* Center content inside header-column */
+    .header-column {
+        align-items: center;
+    }
+
+    /* Adjust personal information layout */
+    #personal-information {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+
+
+        > div {
+            display: flex;
+            gap: 10px;
+        }
+    }
+
+    #personal-information > div > i {
+        margin-left: 0;
+    }
+
+    /* Adjust spacing for content */
+    .content-column {
+        padding-top: 20px;
+    }
+
+    .section-header-container {
+        padding: 0;
+    }
+
+    #about-section-main-header {
+        padding: 0 24px;
+    }
+
+    .about-section-header {
+        margin: 0;
+    }
+}

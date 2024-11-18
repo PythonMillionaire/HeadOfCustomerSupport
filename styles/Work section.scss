@@ -1,0 +1,283 @@
+@import "mixins-and-variables";
+@import "Portfolio";
+
+#work-section {
+  position: relative;
+  top: -30px;
+}
+
+#work-history-container {
+  position: relative;
+  top: 20px;
+
+  // for animation. Prevents the element appearing out of position
+  visibility: hidden;
+}
+
+#work-history-container.animate {
+  @include fadeInBounce(up-work-history, 120px, 1.5s);
+}
+
+#work-history-container svg {
+  display: none;
+}
+
+// "open to offers" element
+#work-history-container > .work-history-row:last-child .work-history-entry-position::before {
+  filter: drop-shadow(0 0 20px hsl(256 36% 40% / 0.8));
+}
+
+#work-history-container .work-history-row:last-of-type {
+  margin-bottom: 140px;
+}
+
+.work-history-row {
+  position: relative;
+
+  width: 100%;
+
+  @include flex($align-items: stretch);
+}
+
+$border-color: hsl(256 20% 60% / 0.58);
+
+.work-history-entry-left-side {
+
+}
+
+.work-history-entry-right-side {
+
+}
+
+.work-history-entry-right-side, .work-history-entry-left-side {
+  width: 50%;
+}
+
+.work-history-entry-right-side::before, .work-history-entry-left-side::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(50% - 2px);
+  width: 2px; /* Width of the border */
+  height: 0;
+  background: $border-color; /* Color of the border */
+  transition: height 2.6s ease-in-out;
+
+  // for animation. Prevents the element appearing out of position
+  visibility: hidden;
+}
+
+.work-history-entry-right-side.animate::before, .work-history-entry-left-side.animate::before {
+  height: 100%;
+
+  visibility: visible;
+}
+
+
+
+$far-margin: 46px;
+$near-margin: 58px;
+
+.work-history-entry-left-side { padding: 20px $near-margin 20px $far-margin; }
+
+
+.work-history-entry-right-side {  padding: 20px $far-margin 20px $near-margin; }
+
+.work-history-entry-header {
+  line-height: 2;
+
+  gap: 6px;
+
+}
+
+.work-history-entry-left-side .work-history-entry-header { @include flex(center, flex-end, column); text-align: right; }
+
+.work-history-entry-right-side .work-history-entry-header { @include flex(center, flex-start, column); text-align: left; }
+
+.work-history-entry-position {
+  font-weight: 600;
+  font-size: 1.15em;
+  position: relative;
+}
+
+.work-history-entry-company {
+  font-weight: 400;
+  font-size: 1.1em;
+
+}
+
+.work-history-entry-date {
+  font-style: italic;
+  font-size: 1.075em;
+}
+
+.work-history-entry-description{
+  font-size: 1em;
+}
+
+$icon-size: 28px;
+
+.work-history-entry-position::before {
+  content: '';
+  background-image: url('../icons/Work history entry.svg');
+  display: block;
+  width: $icon-size;
+  height: $icon-size;
+
+  position: absolute;
+  top: 6px;
+
+  filter: drop-shadow(0 0 3px hsl(256 60% 36% / 1));
+}
+
+$margin-adjustment: -$near-margin - 14px;
+
+.work-history-entry-left-side .work-history-entry-position::before {  right: $margin-adjustment; }
+
+.work-history-entry-right-side .work-history-entry-position::before { left: $margin-adjustment;  }
+
+#work-section ul  {
+  padding-inline-start: 28px;
+  margin-inline-end: 24px;
+
+  > li {
+    line-height: 2;
+  }
+}
+
+@mixin connectingLine($top, $left, $scaleY, $scaleX: 1) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translateX(-50%) scale($scaleX, $scaleY);
+  z-index: -1;
+
+  --gradient-start-translator-webdesigner: hsl(258.46deg 34.61% 37.45%);
+  --gradient-end-translator-webdesigner: hsl(110deg 35.91% 37.25%);
+}
+
+#translator-webdesigner-line {
+  @include connectingLine(132px, 53.2%, 1.4);
+}
+
+#webdesigner-project-manager-line {
+  @include connectingLine(894px, 46.8%, 2.4, -1);
+}
+
+#project-manager-web-dev-specialist-line {
+
+  @include connectingLine(1890px, 53.2%, 2.5);
+}
+
+#open-to-offers {
+  transition: text-shadow 2s ease, filter 2s ease;
+
+  font-size: 1.15em;
+  position: relative;
+  top: -3px;
+
+  display: block;
+}
+
+#open-to-offers.animate {
+  text-shadow: 0 0 6px hsla(256, 30%, 60%, 0.7);
+  filter: drop-shadow(0px 0px 118px hsl(256 40% 80% / 0.15));
+
+  @include shakeAndPulsate;
+}
+
+
+
+
+
+
+
+
+
+/* Responsive adjustments for the Work page */
+@media screen and (max-width: 768px) {
+
+  #open-to-offers {
+    left: 24px;
+  }
+
+  /* Stack work history entries vertically */
+  .work-history-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* Ensure timeline lines up correctly */
+  .work-history-entry-left-side::before,
+  .work-history-entry-right-side::before {
+    left: 10px;
+  }
+
+  /* Adjust header alignment */
+  .work-history-entry-right-side .work-history-entry-header {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .work-history-entry-right-side {
+		padding-left: 12px;
+		padding-right: 0px;
+  }
+
+  #work-history-container {
+    .work-history-row {
+      display: flex;
+
+      // Default layout for odd rows
+      .work-history-entry-left-side {
+        order: 1;
+
+        .work-history-entry-position::before {
+          left: -42px;
+        }
+      }
+      .work-history-entry-right-side {
+        order: 2;
+
+        .work-history-entry-position::before {
+          left: -42px;
+        }
+      }
+
+      .work-history-entry-left-side {
+        padding-left: 28px;
+        padding-right: 0;
+      }
+
+      // Swap sides for even rows
+      &:nth-of-type(even) {
+        flex-direction: row-reverse; // Reverse the direction of children
+        .work-history-entry-right-side {
+          width: 0;
+        }
+
+        .work-history-entry-left-side {
+          width: 100%;
+        }
+      }
+
+      &:nth-of-type(odd) {
+        .work-history-entry-left-side {
+          width: 0;
+        }
+
+        .work-history-entry-right-side {
+          width: 100%;
+        }
+      }
+    }
+
+    svg {
+      display: block;
+      position: absolute;
+      left: 10px;
+      width: 2px;
+      /* Adjust height as necessary */
+    }
+  }
+}

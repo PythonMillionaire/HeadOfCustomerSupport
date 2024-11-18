@@ -1,0 +1,64 @@
+/* END GENERAL */
+/* SKILLS */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 22px;
+}
+
+#header-container-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1120px;
+}
+
+#logo {
+  display: none;
+  font-family: "MV Boli", cursive;
+  position: relative;
+  left: -6px;
+  font-size: 2.35em;
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 0.0075em;
+  filter: drop-shadow(0 0px 12px hsla(257, 50%, 30%, 0.6));
+}
+
+#jose {
+  background: linear-gradient(to bottom, hsl(257, 25%, 100%), hsl(257, 60%, 80%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* For non-webkit browsers */
+  -webkit-text-fill-color: transparent; /* For webkit browsers */
+  filter: drop-shadow(1px 4px 6px hsl(257, 5%, 10%));
+}
+
+#guedes {
+  background: linear-gradient(to bottom, hsl(257, 70%, 76%), hsl(257, 72%, 62%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* For non-webkit browsers */
+  -webkit-text-fill-color: transparent; /* For webkit browsers */
+  position: relative;
+  left: -5px;
+  filter: drop-shadow(1px 4px 6px hsl(257, 5%, 10%));
+}
+
+nav {
+  display: flex;
+  gap: 120px;
+}
+nav a {
+  margin-right: 1em;
+  text-decoration: none;
+  color: hsl(257, 25%, 95%);
+  font-size: 1.05em;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=Navigation%20section.css.map */

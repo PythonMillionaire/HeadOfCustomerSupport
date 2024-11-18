@@ -1,0 +1,87 @@
+@import "mixins-and-variables";
+
+/* About to grab state */
+.draggable {
+  cursor: url('../cursors/cursor-grab.png'), auto !important;
+}
+
+/* Grabbing state */
+.element-drag-active {
+  cursor: url('../cursors/cursor-grabbing.png'), grabbing !important;
+}
+
+
+#skills-section {
+  @include flex(center);
+  margin: 100px 0 170px;
+
+  width: 100vw;
+
+  scroll-margin-top: 120px;
+
+  white-space: nowrap; /* Line up the icons in a row */
+
+  position: relative;
+
+  // for animation. Prevents the element appearing out of position
+  visibility: hidden;
+}
+
+#skills-section-container {
+  @include flex;
+  width: $page-width;
+}
+
+#skills-section-inner {
+  @include flex(left, center, $gap: 26px);
+
+  width: $page-width - 120px;
+  overflow: hidden;
+
+  $mask-gradient: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+
+  /* Apply a horizontal gradient mask */
+  mask-image: $mask-gradient;
+  /* Ensure the mask applies to the content and the background */
+  -webkit-mask-image: $mask-gradient;
+
+  > div {
+    font-size: 1.05em;
+
+    background-color: hsl(257deg 16% 16.97%);
+
+    border-radius: 20px;
+
+    padding: 9px 24px;
+
+    @include flex(center, center, $gap: 8px);
+
+    white-space: nowrap;
+
+    border: 2px solid hsl(256deg 81.84% 82.66%);
+
+    user-select: none;
+
+    will-change: transform; /* Optimizes animations */
+
+    box-sizing: border-box;
+  }
+
+}
+
+.tech-icon {
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  object-fit: contain;
+}
+
+#regex-icon {
+  filter: invert(0.8);
+}
+
+#python-icon {
+  position: relative;
+  top: 2px;
+}

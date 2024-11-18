@@ -1,0 +1,268 @@
+@use 'sass:math';
+
+$primary-color: hsl(257 5% 95% / 1);
+$page-width: 1250px;
+$text-color: hsl(257 25% 98% / 1);
+$text-color-darker-one: hsl(257 25% 90% / 1);
+$text-color-darker-two: hsl(257 25% 85% / 1);
+$text-color-darker-three: hsl(257 25% 82% / 1);
+$color-yellow: hsl(52deg 75% 60%);
+$border-radius: 30px;
+
+$tv-border-width: 23px;
+/* END GENERAL */
+
+/* SKILLS */
+
+
+@mixin flex($justify-content: center, $align-items: center, $flex-direction: row, $gap: 0px, $wrap: nowrap, $inline: false) {
+  display: if($inline, inline-flex, flex);
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+
+  gap: $gap;
+
+  flex-wrap: $wrap;
+}
+
+@mixin cursor {
+  cursor: url("../cursors/cursor.png"), auto;
+}
+
+@mixin pointer {
+  cursor: url("../cursors/cursor-pointer.png") 8 0, auto;
+}
+
+@mixin scrollCursor {
+  cursor: url("../cursors/cursor-scroll.png"), auto;
+}
+
+@mixin zoomCursor {
+  cursor: zoom-in;
+}
+
+@mixin color {
+  color: $text-color;
+}
+
+
+@mixin fadeIn($direction: 'none', $amount: 300px, $duration: 0.5s, $start-scale: 1, $skew: 0) {
+  $transform-x: null;
+  $transform-y: null;
+
+  // if moving left or left plus another direction
+  @if $direction == 'left' or str-index($direction, 'left') {
+    $transform-x: translateX(-$amount);
+  } @else if $direction == 'right' or str-index($direction, 'right')  {
+    $transform-x: translateX($amount);
+  }
+
+  // if moving up or up plus another direction
+  @if $direction == 'up' or str-index($direction, 'up') {
+    $transform-y: translateY($amount);
+  } @else if $direction == 'down' or str-index($direction, 'down') {
+    $transform-y: translateY(-$amount);
+  }
+
+  $transform: $transform-x $transform-y scale($start-scale) skew(0);
+
+  $animation-name: 'fadeIn' + if($direction == 'none', '', $direction);
+
+  visibility: visible;
+
+  @keyframes #{$animation-name} {
+    from {
+      opacity: 0;
+      transform: $transform;
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) translateY(0) skew($skew) scale(1);
+    }
+  }
+
+  animation: #{$animation-name} $duration ease-in-out;
+}
+
+
+@mixin fadeInBounce($direction: 'none', $amount: 300px, $duration: 1.4s, $bounce-dampener: 1, $scale: 1) {
+  $transform-y: null;
+
+  visibility: visible;
+
+  // Determine transform direction for Y axis
+
+  $amount-x: 0;
+  $amount-y: 0;
+
+  @if $direction == 'down' or str-index($direction, 'down') {
+    $amount-y: -$amount;
+  } @else if $direction == 'up' or str-index($direction, 'up') {
+    $amount-y: $amount;
+  }
+
+  @if $direction == 'left' or str-index($direction, 'left') {
+    $amount-x: -$amount;
+  } @else if $direction == 'right' or str-index($direction, 'right') {
+    $amount-x: $amount;
+  }
+
+  $animation-name: 'fadeInBounce' + $direction;
+
+  @keyframes #{$animation-name} {
+    0% {
+      opacity: 0;
+      transform: translateY($amount-y) translateX($amount-x) scale($scale);
+    }
+    45% {
+      opacity: 0.5;
+      transform: translateY(math.div(-$amount-y, 10 * $bounce-dampener)) translateX(math.div(-$amount-x, 10 * $bounce-dampener)) scale($scale);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(math.div($amount-y, 15 * $bounce-dampener)) translateX(math.div($amount-x, 15 * $bounce-dampener)) scale($scale);
+    }
+    75% {
+      transform:  translateY(math.div(-$amount-y, 25 * $bounce-dampener)) translateX(math.div(-$amount-x, 25 * $bounce-dampener)) scale($scale);
+    }
+    90% {
+      transform:  translateY(math.div($amount-y, 35 * $bounce-dampener)) translateX(math.div($amount-x, 35 * $bounce-dampener)) scale($scale);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale($scale);
+    }
+  }
+
+  animation: #{$animation-name} $duration ease-in-out;
+}
+
+$fadeFromScreenDuration: 0.3s;
+
+@mixin fadeOutOfScreen($direction, $duration: $fadeFromScreenDuration) {
+  @keyframes fadeOutOfScreen-#{$direction} {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(if($direction == 'right', 100%, -100%));
+    }
+  }
+
+  animation: fadeOutOfScreen-#{$direction} ease-in-out $duration forwards;
+}
+
+@mixin fadeIntoScreen($direction, $duration: $fadeFromScreenDuration) {
+  @keyframes fadeIntoScreen-#{$direction} {
+    from {
+      opacity: 0;
+      transform: translateX(if($direction == 'left', -100%, 100%));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  animation: fadeIntoScreen-#{$direction} ease-in-out $duration forwards;
+}
+
+
+@mixin shakeAndPulsate() {
+  visibility: visible;
+
+  // Keyframes for combined shaking and pulsating
+  @keyframes shakeAndPulsate {
+    // Shake phase
+    2%, 6%, 10%, 14%, 18% {
+      transform: rotate(-4deg) scale(1);
+    }
+    4%, 8%, 12%, 16% {
+      transform: rotate(4deg) scale(1);
+    }
+    20% {
+      transform: rotate(0) scale(1);
+    }
+    // Pulsate phase
+    35%, 85% {
+      transform: scale(1.1);
+    }
+    60%, 100% {
+      transform: scale(1);
+    }
+  }
+
+  // Apply the combined animation
+  animation: shakeAndPulsate 5s ease-in-out infinite;
+}
+
+@mixin fadeInExpand($height: 100%, $duration: 1.4s, $name: null) {
+  visibility: visible;
+
+  @keyframes fadeInExpand-#{$name} {
+    from {
+      max-height: 0;
+    }
+    to {
+      max-height: $height;
+    }
+  }
+
+  $animation-name: fadeInExpand-#{$name};
+
+  animation: #{$animation-name} $duration ease;
+}
+
+@mixin fadeInExpandTransform($height: 1, $duration: 1.4s, $name: null) {
+  visibility: visible;
+
+  @keyframes fadeInExpand-#{$name} {
+    from {
+      transform: scale(0.1);
+    }
+    to {
+      transform: scale($height);
+    }
+  }
+
+  $animation-name: fadeInExpand-#{$name};
+
+  animation: #{$animation-name} $duration ease;
+}
+
+@mixin textFadeInExpand($size, $duration, $name: null) {
+  visibility: visible;
+
+  @keyframes fadeInExpand-#{$name} {
+    from {
+      font-size: 0;
+    }
+    to {
+      font-size: $size;
+    }
+  }
+
+  $animation-name: fadeInExpand-#{$name};
+
+  animation: #{$animation-name} $duration ease;
+}
+
+@mixin fadeInScale($scale, $duration, $name: null) {
+  visibility: visible;
+
+  @keyframes fadeInScale-#{$name} {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale($scale);
+    }
+  }
+
+  $animation-name: fadeInScale-#{$name};
+
+  animation: #{$animation-name} $duration ease;
+}

@@ -1,0 +1,111 @@
+@import "mixins-and-variables";
+
+:root {
+  --hue-modifier: 1.8; // Adjust this variable to change the hue
+}
+
+
+#code-sections-container {
+  position: absolute;
+  top: 136px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1236px;
+  height: 1100px;
+  opacity: 0.3;
+  z-index: 1;
+
+  display: none;
+}
+
+pre.code-editor {
+  filter: saturate(1);
+  color: hsl(calc(60 * var(--hue-modifier)) 80% 76% / 1); // Light text color
+  padding: 20px;
+  border-radius: 8px;
+  font-family: 'Source Code Pro', monospace;
+  overflow: hidden;
+
+  code {
+    display: block;
+    white-space: pre;
+    line-height: 1.5;
+  }
+
+  // Specific syntax highlighting styles
+  .keyword { color: hsl(calc(240 * var(--hue-modifier)) 90% 50% / 1); }
+  .function { color: hsl(calc(300 * var(--hue-modifier)) 70% 50% / 1); }
+  .string { color: hsl(calc(120 * var(--hue-modifier)) 40% 70% / 1); }
+  .comment { color: hsl(calc(30 * var(--hue-modifier)) 50% 50% / 1); opacity: 0.7; }
+  .number { color: hsl(calc(360 * var(--hue-modifier)) 100% 70% / 1); }
+  .operator { color: hsl(calc(180 * var(--hue-modifier)) 100% 70% / 1); }
+}
+
+.code-section {
+  position: absolute;
+  font-size: 1.355em;
+  letter-spacing: 0.035em;
+  line-height: 1.65;
+  font-family: 'Source Code Pro', monospace;
+  overflow: hidden;
+}
+
+@mixin main-code-section($top, $left) {
+  line-height: 1.85;
+  top: $top;
+  left: $left;
+  opacity: 0.28;
+  z-index: 1;
+  width: 900px;
+}
+
+
+
+#main-code-section-left {
+  @include main-code-section(-82px, 49%);
+  width: 900px;
+  z-index: 1;
+
+}
+
+#code-section-middle {
+  code {
+    position: relative;
+    left: -300px;
+  }
+
+  @include main-code-section(72px, 58%);
+  width: 450px;
+  z-index: 2;
+  opacity: 0.13;
+
+}
+
+#main-code-section-right {
+  @include main-code-section(-76px, 100%);
+  width: 900px;
+  z-index: 1;
+
+}
+
+
+#main-code-section-left, #code-section-middle, #main-code-section-right {
+  --x: 0deg;
+  --y: 0deg;
+  --z: 0deg;
+  --translate-x: 0px;
+  --translate-y: 0px;
+  transition: transform 3s ease; /* Apply a smooth transition to the transform property */
+
+}
+
+
+
+
+$h1:  rgba(45,45,45,1);
+$blue: #98b5cc;
+$yellow: #ffcc00;
+$outline: rgba(#fff, .4);
+$shadow: rgba($yellow, .5);
+
+

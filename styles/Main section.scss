@@ -1,0 +1,427 @@
+@import "mixins-and-variables";
+@import "project-cards";
+
+$caret-color: hsl(265 74% 64% / 1);
+
+.cursor-typing-effect {
+  display: inline-block;
+  background-color: $caret-color;
+  margin-left: 0.1rem;
+  width: 3px;
+  animation: blink 1s infinite;
+}
+
+.cursor-typing-effect.typing {
+  animation: none;
+}
+
+@keyframes blink {
+  0%, 49% { background-color: $caret-color; }
+  50%, 99% { background-color: transparent; }
+  100% { background-color: $caret-color; }
+}
+
+.highlight {
+  background-color: #7b5ec524;
+}
+
+$scale: 1.25 * 0.92;
+
+#main {
+  @include flex(flex-start, center, $flex-direction: column);
+  flex-grow: 1;
+  text-align: center;
+  width: 100%;
+  margin-top: 120px;
+
+  z-index: 1;
+
+  .main-section-background {
+    border-radius: 50px;
+  }
+
+  h2 {
+    font-style: italic;
+
+    margin: 1.3em 0;
+
+  }
+
+  h2.main-section-content {
+      margin: 0.75em 0 1.3em;
+  }
+
+
+  .call-to-action-buttons {
+    position: relative;
+    top: -1.35em;
+    left: -0.6em;
+
+    @include flex;
+    width: 100%;
+    gap: 1em;
+
+    //background-color: hsl(252deg 28.27% 16.08% / 53%);
+    //filter: drop-shadow(0 0 30px hsl(252deg 15.19% 12% / 1));
+
+    padding: 1.25em 0.3em;
+
+    button {
+      margin-right: 1em;
+    }
+
+    transform: scale($scale - 0.025);
+  }
+}
+
+#main-container {
+  @include flex(center, center, $flex-direction: column);
+
+  text-align: center;
+  width: $page-width;
+
+  position: relative;
+
+  @include fadeInBounce(up-main-container, $amount: 100px, $bounce-dampener: 10);
+
+  font-size: #{$scale}em;
+
+  margin-top: calc(80px + 2.5vh);
+}
+
+h1 {
+  font-size: 3.275em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Times New Roman", serif;
+  //background-color: hsla(252, 16.36%, 20.43%, 0.34);
+  filter: drop-shadow(0 0 8px hsl(252, 16%, 16%));
+  margin: 0;
+  line-height: 1.775em;
+
+}
+
+h1 > span {
+  filter: drop-shadow(0px 0px 1px hsl(256 30% 70% / 1));
+
+}
+
+
+h2.main-section-background {
+  border-radius: 50px;
+
+}
+
+h2 {
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+  font-size: 1.85em;
+  font-weight: 300;
+  white-space: nowrap;
+  line-height: 2.6;
+  letter-spacing: 0.025em;
+  color: hsl(257deg 42.26% 90.45%);
+
+  filter: drop-shadow(0 0 20px hsl(252deg 16.41% 12.3%));
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.15em;
+  margin: 0 0 0.65em 0;
+  color: hsl(257deg 63.01% 83.37%);
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+}
+
+$border-width: 3px;
+$button-height: 60px;
+$button-width: 212px;
+
+#tour-button-container {
+  position: relative;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.025em;
+  width: $button-width;
+  height: $button-height;
+  background-color: transparent;
+  border: none;
+  color: $text-color;
+  cursor: none;
+
+}
+
+#tour-button-borders.animate {
+  //@include shakeAndPulsate;
+}
+
+#tour-button-text {
+  width: $button-width;
+  height: $button-height;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 9px;
+
+  @include flex;
+}
+
+#tour-button-borders {
+  height: $button-height;
+  position: relative;
+  top: 2px;
+  transform: rotate(-1deg);
+
+  filter: drop-shadow(0 0 18px hsla(256, 60%, 80%, 0.05)) drop-shadow(0 0 60px hsla(256, 60%, 80%, 0.4)) drop-shadow(0 0 3px hsla(256, 60%, 80%, 0.07));
+
+}
+
+#tour-button-left, #tour-button-right, #tour-button-top, #tour-button-bottom
+{
+  position: absolute;
+  height: $button-height;
+  width: $button-width;
+}
+
+@mixin button($h, $w, $side, $t, $l, $a-1, $a-2) {
+  #tour-button-#{$side} {
+    border-#{$side}: $border-width solid #7c5ec9;
+    height: $h;
+    width: $w;
+    transform: skew($a-1, $a-2);
+    top: $t;
+    left: $l;
+  }
+}
+
+// Assuming $button-width and $button-height are defined elsewhere
+$button-sides: (
+        "left": ($button-width, $button-height + 11px, -14px, 18px, -7deg, -3deg),
+        "right": ($button-width, $button-height + 12px, -10px, -14px, 2deg, 2deg),
+        "top": ($button-width - 17px, $button-height, -1px, 10px, 0deg, 1.1deg),
+        "bottom": ($button-width - 11px, $button-height, -6px, 9px, 0deg, 2.5deg)
+);
+
+// Loop through each side and apply the mixin
+@each $side, $dimensions in $button-sides {
+  $width: nth($dimensions, 1);
+  $height: nth($dimensions, 2);
+  $top: nth($dimensions, 3);
+  $left: nth($dimensions, 4);
+  $angle1: nth($dimensions, 5);
+  $angle2: nth($dimensions, 6);
+  @include button($height, $width, $side, $top, $left, $angle1, $angle2);
+}
+
+
+$get-in-touch-button-width: 144px;
+$get-in-touch-button-height: 32px;
+
+#get-in-touch-button {
+  width: $get-in-touch-button-width;
+  height: $get-in-touch-button-height;
+
+
+  transform: skew(25deg);
+  padding: 24px 52px;
+  color: white;
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  filter: drop-shadow(0px 30px 25px hsla(256, 40%, 25%, 0.25));
+  background: linear-gradient(to bottom, hsl(257, 48%, 60%), hsl(257, 38%, 48%));
+  clip-path: polygon(17% 8%, 90% 10%, 83% 78%, 6% 82%);
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%; /* Start from the right */
+    width: 25%; /* Width of the reflex band */
+    height: 100%;
+    background: linear-gradient(-30deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.125) 50%, rgba(255, 255, 255, 0.05) 100%);
+    transform: skewX(30deg);
+    pointer-events: none; /* Prevent the reflex from interfering with button clicks */
+    animation: moveReflex 5s infinite linear;
+  }
+
+  @keyframes moveReflex {
+    0%, 100% {
+      opacity: 1;
+    }
+    20% {
+      transform: translateX(-20em);
+      opacity: 1;
+    }
+    20.1%, 99% {
+      opacity: 0; // hide the band before it teleports back
+    }
+  }
+
+  /*
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      // top left, top right, bottom right, bottom left
+      clip-path: polygon(17% 8%, 90% 10%, 83% 78%, 6% 82%);
+      transition: 1s all;
+      background: linear-gradient(to bottom, hsl(257, 48%, 60%), hsl(257, 38%, 48%));
+    }
+    // border
+    &:before {
+      background: hsl(257 50% 58% / 1);
+      transform: scale(1.04, 1.1);
+    }
+    &:hover:before,
+    &:hover:after {
+      clip-path: polygon(20% 8%, 88% 10%, 85% 84%, 4% 88%);
+    }
+
+    &:hover:before {
+      background: hsl(257 50% 85% / 1);
+    }*/
+}
+
+body {
+
+  height: 100vh;
+
+  @include flex(flex-start, center, column);
+}
+
+#get-in-touch-button-text {
+  width: 100%;
+  font-family: "Segoe UI Variable", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.356rem;
+  color: hsl(256 20% 92% / 1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-52%, -72%);
+  text-align: center;
+  pointer-events: none;
+}
+
+#get-in-touch-button-container {
+  position: relative;
+  top: 5px;
+
+  cursor: none;
+
+  &.animate {
+    @include shakeAndPulsate;
+  }
+}
+
+
+#main-image {
+  width: 76.5%;
+}
+
+.highlighted-text {
+  background-color: hsl(256deg 25.15% 24.54%);
+}
+
+#h1-wrapper {
+  display: flex;
+}
+
+#h1-content {
+  height: 100%;
+}
+
+#h1-content span {
+  padding: 0.15em 0 0.25em;
+}
+
+
+#svg-highlight {
+  width: 24.2em;
+  position: absolute;
+  top: 11em;
+  left: 12.75em;
+  fill: transparent;
+  stroke: #c5b43f;
+
+  stroke-width: 1.5px;
+}
+
+#svg-highlight path {
+  stroke-dasharray: 1000; /* Large enough value to cover the entire path */
+  stroke-dashoffset: 1000; /* Initially offset by the same amount */
+  animation: draw 5s linear forwards; /* Adjust duration as needed */
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@mixin customCursor {
+  @include flex;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+  top: 0;
+  z-index: 5;
+  opacity: 0;
+
+  box-sizing: border-box;
+}
+
+#pointing-hand {
+  @include customCursor;
+
+  svg {
+    width: 100px;
+  }
+}
+
+#tour-cursor {
+  @include customCursor;
+
+  width: 92px;
+
+  filter: drop-shadow(0px 0px 30px hsl(256 20% 60% / 0.25));
+}
+
+
+@media screen and (max-width: 768px) {
+  #main-container {
+    font-size: 2vw;
+  }
+
+  h2.main-section-content {
+    max-width: calc(100vw - 40px);
+    word-wrap: break-word; /* Ensures long words break */
+    overflow-wrap: break-word; /* Modern equivalent, ensures consistency */
+    white-space: normal; /* Allows wrapping instead of keeping content in a single line */
+  }
+
+  #svg-highlight {
+    display: none;
+  }
+
+  #h1-content {
+    max-width: calc(100vw - 40px);
+
+    word-wrap: break-word; /* Ensures long words break */
+    overflow-wrap: break-word; /* Modern equivalent, ensures consistency */
+    white-space: normal; /* Allows wrapping instead of keeping content in a single line */
+
+  }
+
+  #main .call-to-action-buttons, #skills-section {
+    transform: scale(0.8) !important;
+  }
+}

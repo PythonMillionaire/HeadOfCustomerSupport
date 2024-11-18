@@ -1,0 +1,244 @@
+@import "mixins-and-variables";
+
+#strong-areas-icon, #weak-areas-icon {
+  width: 12%;
+}
+
+
+#weak-strong-points-section {
+  position: relative;
+  z-index: 0;
+}
+
+$padding-v: 122px;
+
+$after-height: calc(100%);
+
+#weak-strong-points-section-background {
+  background: linear-gradient(to bottom, hsl(255deg 16% 14.5%), hsl(256deg 8% 12% / 65%));
+
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  width: 350vw;
+  height: $after-height;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transform-origin: top left;
+  z-index: -1;
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 6px hsl(256 20% 30% / 0.2);
+
+  border: 1px solid hsl(257.42deg 22.96% 26.47%);
+}
+
+#weak-strong-points-section-background.animate {
+  @include fadeInExpand($after-height, 2.6s, weak-strong-points-section-background);
+}
+
+
+#weak-strong-points-section-contents {
+  position: relative;
+
+  @include flex(center, flex-start);
+
+  gap: 80px;
+
+  padding: $padding-v 90px ($padding-v + 6px);
+
+  color: $text-color-darker-three;
+
+
+}
+
+#strong-areas, #weak-areas {
+  @include flex(flex-start, flex-start, column);
+  width: 50%;
+}
+
+
+$weak-strong-duration: 1.2s;
+
+#strong-areas.animate {
+  @include fadeInBounce(left-strong-areas, $duration: $weak-strong-duration);
+}
+
+#weak-areas.animate {
+  @include fadeInBounce(right-weak-areas, $duration: $weak-strong-duration);
+}
+
+
+#what-to-expect-sign-container {
+  @include flex;
+
+  position: relative;
+  top: 60px;
+
+  transform: rotate(-2deg);
+}
+
+$what-to-expect-sign-width: 144px;
+$what-to-expect-sign-height: 32px;
+
+#what-to-expect-sign {
+  width: $what-to-expect-sign-width;
+  height: $what-to-expect-sign-height;
+
+  transform: skew(25deg);
+  padding: 26px 80px;
+  font-size: 30px;
+  color: white;
+  border: none;
+  background: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  filter: drop-shadow(0px 0px 36px hsla(256, 40%, 25%, 0.55));
+
+  transition: transform 1s ease;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // top left, top right, bottom right, bottom left
+    clip-path: polygon(17% 8%, 90% 10%, 83% 78%, 6% 82%);
+    transition: 1s all;
+    background: linear-gradient(to bottom, hsl(257, 17%, 26%), hsl(257, 27%, 20%));
+  }
+  &:before {
+    /* border */
+    background: hsl(257 54% 62% / 1);
+    transform: scale(1.04, 1.1);
+  }
+}
+
+#what-to-expect-sign.animate {
+  @include fadeIn($duration: 1s, $start-scale: 0.5, $skew: 25deg);
+}
+
+
+#what-to-expect-sign-text {
+  width: 100%;
+  font-family: "Segoe UI Variable", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: hsl(256 20% 92% / 1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%) rotate(-1deg);
+  text-align: center;
+  pointer-events: none;
+}
+
+
+#weak-strong-divider {
+  @include flex($flex-direction: column);
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 55%;
+  width: 2px;
+
+  gap: 25px;
+
+  @mixin endChildren($m-direction) {
+    background-color: hsl(256deg 21.55% 48.71%);
+
+    mask-image: linear-gradient($m-direction, rgba(0,0,0, 0.15), transparent);
+
+    width: 100%;
+    height: 100%;
+  }
+
+  :first-child {
+    @include endChildren(to top);
+  }
+
+  :nth-child(2) {
+    position: relative;
+    padding: 7px 0;
+    top: -5px;
+
+    @mixin parallelLine($position, $bg-color) {
+      content: '';
+
+      display: block;
+
+      position: absolute;
+      #{$position}: 0px;
+      left: 50%;
+
+      width: 16px;
+      height: 2px;
+
+      background-color: $bg-color;
+
+      transform: rotate(-30deg) translateX(-50%);
+    }
+
+    &::before {
+      @include parallelLine(top, hsl(256deg 45.41% 53.85%));
+    }
+
+    &::after {
+      @include parallelLine(bottom, hsl(110.77deg 20% 43%));
+    }
+  }
+
+  :last-child {
+    @include endChildren(to bottom);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive adjustments for the What to Expect section */
+@media screen and (max-width: 768px) {
+  /* Stack strong and weak areas vertically */
+  #weak-strong-points-section-contents {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  /* Set sections to full width */
+  #strong-areas,
+  #weak-areas {
+    width: 100%;
+  }
+
+  /* Center the headers */
+  #strong-areas .header-row h4,
+  #weak-areas .header-row h4 {
+    text-align: center;
+  }
+
+  /* Hide the divider */
+  #weak-strong-divider {
+    display: none;
+  }
+}

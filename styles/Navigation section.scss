@@ -1,0 +1,246 @@
+@use 'sass:math';
+@import "mixins-and-variables";
+@import "Logo";
+
+
+header {
+  @include flex;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 14px;
+
+  position: fixed;
+
+  top: 0;
+
+  z-index: 1;
+
+  $t-time: 0.3s;
+
+  transition: background $t-time ease, box-shadow $t-time ease, top $t-time ease;
+}
+
+.sticky {
+  background-color: hsl(256 17% 17% / 1);
+  box-shadow: 0 4px 36px 0 hsl(256, 20%, 14%), 0 1px 1px 0 hsl(256, 20%, 10%);
+  border-bottom: 1px solid hsl(256, 22.37%, 26.5%);
+  z-index: 2;
+  margin: 0;
+  border-radius: 50%;
+  width: calc(1.75 * 100vw);
+  padding: 1.25em 0 1em 0;
+  top: -5px;
+}
+
+
+
+
+#header-container-inner {
+  @include flex(space-between, center);
+
+  width: $page-width - 70;
+}
+
+
+nav {
+  display: flex;
+  gap: 2.65em;
+
+  @include fadeInBounce(down-nav, $bounce-dampener: 10);
+
+  a {
+    user-select: none;
+    text-decoration: none;
+    color: hsl(257deg 54.54% 90% / 90%);
+    font-size: 1.075em;
+    font-family: 'Source Code Pro', monospace;
+    letter-spacing: -0.01em;
+    transform: scaleX(0.925);
+
+    position: relative;
+
+    > span {
+      transition: text-shadow 0.2s ease,  drop-shadow 0.15s ease, top 0.125s ease-in;
+    }
+
+    > span.selected::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, hsla(110, 50%, 58%, 0.7) 10%, hsl(257, 71%, 68%) 50%, hsl(257, 71%, 68%) 100%);
+      position: absolute;
+      top: 50%;
+      box-shadow: 0 0 1px;
+      border-radius: 30px;
+      padding: 6px 16px;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      z-index: -2;
+
+    }
+
+    > span.selected::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: hsl(255deg 17.78% 16%);
+      position: absolute;
+      top: 50%;
+      box-shadow: 0 0 1px;
+      border-radius: 30px;
+      padding: 4px 14px;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      z-index: -1;
+
+    }
+  }
+
+  a:not(:last-child) {
+    margin-right: 1em;
+  }
+
+  a:hover > span:not(.selected) {
+    text-shadow: 0px 0px 1px hsl(256 11% 39% / 1), 0px 0px 32px hsl(256 12% 37% / 0.76);
+    color: hsla(257, 80%, 78.7%, 0.92);
+    filter: drop-shadow(0px 0px 0px #d1c1ff);
+
+    position: relative;
+
+    padding-bottom: 2px;
+
+    $border-color: hsla(256, 40%, 84%, 0.4);
+    /*border-top: 2px solid $border-color;
+    border-bottom: 2px solid $border-color;*/
+  }
+}
+
+
+
+#contact-me-section {
+  opacity: 0.85;
+
+  @include flex;
+
+  gap: 0.5em;
+
+  position: relative;
+
+  right: -8px;
+  top: 3px;
+
+  @include fadeInBounce(down-right-contact-me, $bounce-dampener: 10);
+
+  user-select: none;
+
+  > span {
+    position: relative;
+
+    &:hover .custom-tooltip {
+      visibility: visible;
+      top: 46px;
+
+      &::after {
+        border-width: 9px;
+        border-color:  transparent transparent #eae4f5 transparent;
+        top: -10px;
+      }
+    }
+  }
+}
+
+.social-media-icon {
+  width: 0.95em;
+  filter: invert(1) drop-shadow(0 0 5px hsla(256, 60%, 60%, 0.42)) drop-shadow(0 0 1px hsla(256, 100%, 60%, 0.3)) drop-shadow(0 2px 1px hsla(257, 16%, 15%, 0.15));
+  padding: 0.5em;
+}
+
+
+
+/* Hide the hamburger menu and mobile overlay by default */
+.hamburger-menu,
+#mobile-nav-overlay {
+  display: none;
+}
+
+/* Mobile Styles */
+@media (max-width: 48em) {
+  /* Hide desktop navigation and contact section */
+  nav,
+  #contact-me-section {
+    display: none;
+  }
+
+  .sticky {
+    background-color: hsl(256 17% 17% / 1);
+    box-shadow: 0 4px 36px 0 hsl(256, 20%, 14%), 0 1px 1px 0 hsl(256, 20%, 10%);
+    border-bottom: 1px solid hsl(256, 22.37%, 26.5%);
+    z-index: 2;
+    margin: 0;
+    border-radius: 0;
+    width: 100vw;
+    padding: 1.25em 0 1em 0;
+    top: -5px;
+
+    #logo-text {
+      margin-left: 40px;
+    }
+
+    .hamburger-menu {
+      margin-right: 40px;
+    }
+  }
+
+  /* Show hamburger menu */
+  .hamburger-menu {
+    display: block;
+    cursor: pointer;
+  }
+
+  .hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: #fff; /* Adjust this color as needed */
+  }
+
+  /* Style the mobile navigation overlay */
+  #mobile-nav-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: hsl(226deg 33.2% 4.25% / 95%);
+    z-index: 999;
+  }
+
+  #mobile-nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  #mobile-nav-container a {
+    color: #fff;
+    font-size: 2em;
+    margin: 15px;
+    text-decoration: none;
+  }
+
+  /* Style for the close button */
+  .close-overlay {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+  }
+}

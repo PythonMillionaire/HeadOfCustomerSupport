@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg height="96" width="85" version="1.1"
+	 id="svg2" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 297.5 337.3"
+	 style="enable-background:new 0 0 297.5 337.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#D4B830;}
+	.st1{fill:#FFFFFF;}
+</style>
+<g id="Layer_1" transform="translate(-0.071,-82.67)">
+	<path id="path13" class="st0" d="M27.1,386.3L0.1,82.7h297.5l-27.1,303.6L148.6,420L27.1,386.3z"/>
+	<g id="Group" transform="translate(55,142)">
+		<path id="path18" class="st1" d="M191.2,78.4h-47.1V44.2h50.1l3-33.5h-88v101.2h45.6l-4,43.4l-41.5,7.6v34.9l72.8-16.6L191.2,78.4
+			z"/>
+		<path id="path24" class="st1" d="M89.7,10.7H13.5l3.2,33.5l38.8,0V158l-19-2.7L34,128.6c0,0-22.8,0-34.3,0l4.8,52.5
+			c85.2,16.6,0.3,0,85.2,16.6V10.7z"/>
+	</g>
+</g>
+</svg>
