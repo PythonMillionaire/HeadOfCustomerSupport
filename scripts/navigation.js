@@ -174,7 +174,6 @@ function navigateTo(pageName) {
 
         function afterContentLoaded() {
             // Do not update the URL
-            // history.pushState({ page: pageName }, null, url);
             resolve();
         }
 
@@ -185,7 +184,8 @@ function navigateTo(pageName) {
             fetchAndDisplayPage(pageName).then(afterContentLoaded);
         }
 
-        setupNavigation();
+        // Remove redundant call to setupNavigation()
+        // setupNavigation();
     });
 }
 
@@ -216,20 +216,22 @@ function setUpMainPage() {
 
 window.addEventListener('load', () => {
     scrollToTop();
-    setupNavigation();
 
+    // Initialize animations and navigation only once
     initializeAnimations();
+    setupNavigation();
 
     const mainContent = document.getElementById('main').innerHTML;
     pageCache['main'] = mainContent;
 
     setUpMainPage();
 
+    // Preload pages and images
     preloadPagesAndImages().then(() => {
         preloaded = true;
 
-        // Always load the main page content on initial load
-        navigateTo('main').then();
+        // No need to navigate to 'main' since it's already loaded
+        // navigateTo('main').then();
     });
 });
 
