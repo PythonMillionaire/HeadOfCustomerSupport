@@ -3845,10 +3845,10 @@ body, html {
   color: hsl(257, 25%, 98%);
   scroll-behavior: smooth;
   font-size: 16px;
-  overflow-x: hidden;
 }
 
 body {
+  overflow-x: hidden;
   background: linear-gradient(to bottom, hsl(257, 15.08%, 13%), hsl(257, 16%, 15%)) no-repeat;
   background-size: 100% 1500%;
 }
@@ -4002,6 +4002,9 @@ s {
 
 /* Responsive adjustments for main content width */
 @media screen and (max-width: 48em) {
+  body, html {
+    overflow-x: hidden;
+  }
   #skills-section {
     display: flex;
     justify-content: center;
