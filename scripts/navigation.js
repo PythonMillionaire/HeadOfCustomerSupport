@@ -23,16 +23,6 @@ function setupNavigation() {
         });
     });
 
-    const mobileNav = document.querySelector('#mobile-nav-container');
-
-    const mobileNavLinks = mobileNav.querySelectorAll('a[data-page-name]');
-
-    mobileNavLinks.forEach((link) => {
-        addOrReplaceEventListener(link, 'click', (event) => {
-            event.preventDefault(); // Prevent default link behavior
-            navigateTo(link.dataset.pageName).then();
-        });
-    });
 
 
 
@@ -53,6 +43,19 @@ function setupNavigation() {
         mobileNavOverlay.style.display = 'none';
     });
 
+    const mobileNav = document.querySelector('#mobile-nav-container');
+
+    const mobileNavLinks = mobileNav.querySelectorAll('a[data-page-name]');
+
+    mobileNavLinks.forEach((link) => {
+        addOrReplaceEventListener(link, 'click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            navigateTo(link.dataset.pageName).then();
+
+            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+            mobileNavOverlay.style.display = 'none';
+        });
+    });
 
     const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
 
