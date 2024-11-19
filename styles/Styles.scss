@@ -67,10 +67,6 @@ body, html {
   font-size: 16px;
 
   overflow-x: hidden;
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 body {
@@ -218,8 +214,6 @@ li::marker {
 footer {
   text-align: center;
   padding: 1em;
-
-  margin-top: auto;
 }
 
 s
