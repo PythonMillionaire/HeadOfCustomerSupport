@@ -3845,7 +3845,6 @@ body, html {
   color: hsl(257, 25%, 98%);
   scroll-behavior: smooth;
   font-size: 16px;
-  overflow-x: hidden;
 }
 
 body {
