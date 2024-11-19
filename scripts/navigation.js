@@ -23,6 +23,17 @@ function setupNavigation() {
         });
     });
 
+    const mobileNav = document.querySelector('#mobile-nav-container');
+
+    const mobileNavLinks = header.querySelectorAll('a[data-page-name]');
+
+    mobileNavLinks.forEach((link) => {
+        addOrReplaceEventListener(link, 'click', (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            navigateTo(link.dataset.pageName).then();
+        });
+    });
+
 
 
     //mobile
