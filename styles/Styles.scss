@@ -258,7 +258,15 @@ s
 
 
 /* Responsive adjustments for main content width */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
+
+  #skills-section {
+    @include flex(center);
+    margin: 100px 0 170px;
+
+    width: 80vw;
+  }
+
   #main h2
   {
     margin-bottom: 0.8rem;

@@ -314,7 +314,7 @@ $about-duration: 1.4s;
 
 
 /* Responsive adjustments for the About page */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
     h4.about-section-header {
         font-size: 1.225em;
     }

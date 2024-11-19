@@ -215,7 +215,7 @@ $what-to-expect-sign-height: 32px;
 
 
 /* Responsive adjustments for the What to Expect section */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   /* Stack strong and weak areas vertically */
   #weak-strong-points-section-contents {
     flex-direction: column;

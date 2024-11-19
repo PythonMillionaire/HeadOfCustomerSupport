@@ -1423,7 +1423,7 @@ body {
   filter: drop-shadow(0px 0px 30px hsla(256, 20%, 60%, 0.25));
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   #main-container {
     font-size: 2vw;
   }
@@ -1784,7 +1784,7 @@ body {
 }
 
 /* Responsive adjustments for the What to Expect section */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   /* Stack strong and weak areas vertically */
   #weak-strong-points-section-contents {
     flex-direction: column;
@@ -3111,7 +3111,7 @@ body {
 }
 
 /* Responsive adjustments for the Work page */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   #open-to-offers {
     left: 24px;
   }
@@ -3585,7 +3585,7 @@ h4 {
 }
 
 /* Responsive adjustments for the About page */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   h4.about-section-header {
     font-size: 1.225em;
   }
@@ -4001,7 +4001,17 @@ s {
 }
 
 /* Responsive adjustments for main content width */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
+  #skills-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0px;
+    flex-wrap: nowrap;
+    margin: 100px 0 170px;
+    width: 80vw;
+  }
   #main h2 {
     margin-bottom: 0.8rem;
   }
