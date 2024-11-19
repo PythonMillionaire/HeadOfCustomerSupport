@@ -9,11 +9,7 @@ if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-function handleNavigationToPage(link){
-    return function() {
-        navigateTo(link.dataset.pageName).then();
-    }
-}
+
 
 function setupNavigation() {
     const header = document.querySelector('header');
@@ -163,9 +159,8 @@ function navigateTo(pageName) {
         }
 
         function afterContentLoaded() {
-            // Push the new state to history
-            const url = pageName === 'main' ? '/' : `/${pageName}`;
-            history.pushState({ page: pageName }, null, url);
+            // Do not update the URL
+            // history.pushState({ page: pageName }, null, url);
             resolve();
         }
 
@@ -182,6 +177,7 @@ function navigateTo(pageName) {
 
 
 
+
 function setUpMainPage() {
     function handleNavigateToPortfolio(){
         return function() {
@@ -193,7 +189,7 @@ function setUpMainPage() {
 
 }
 
-window.addEventListener('popstate', (event) => {
+/*window.addEventListener('popstate', (event) => {
     let pageName;
     if (event.state && event.state.page) {
         pageName = event.state.page;
@@ -202,7 +198,7 @@ window.addEventListener('popstate', (event) => {
         pageName = path === '/' ? 'main' : path.replace('/', '');
     }
     navigateTo(pageName).then();
-});
+});*/
 
 window.addEventListener('load', () => {
     scrollToTop();
@@ -218,13 +214,11 @@ window.addEventListener('load', () => {
     preloadPagesAndImages().then(() => {
         preloaded = true;
 
-        // Determine the initial page based on the current URL
-        let path = window.location.pathname;
-        path = path === '/' ? 'main' : path.replace('/', '');
-
-        navigateTo(path).then();
+        // Always load the main page content on initial load
+        navigateTo('main').then();
     });
 });
+
 
 
 
