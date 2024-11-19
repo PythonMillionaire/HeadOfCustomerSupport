@@ -25,7 +25,7 @@ function setupNavigation() {
 
     const mobileNav = document.querySelector('#mobile-nav-container');
 
-    const mobileNavLinks = header.querySelectorAll('a[data-page-name]');
+    const mobileNavLinks = mobileNav.querySelectorAll('a[data-page-name]');
 
     mobileNavLinks.forEach((link) => {
         addOrReplaceEventListener(link, 'click', (event) => {
