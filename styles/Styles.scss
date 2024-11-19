@@ -65,10 +65,11 @@ body, html {
 
   scroll-behavior: smooth;
   font-size: 16px;
+
+  overflow-x: hidden;
 }
 
 body {
-  overflow-x: hidden;
 
   background: linear-gradient(to bottom, hsl(257deg 15.08% 13%), hsl(257, 16%, 15%)) no-repeat;
   background-size: 100% 1500%;
